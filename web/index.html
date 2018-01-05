@@ -3,44 +3,58 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Marrow Donor Registry UFO Simulation</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Marrow Donor Registry UFO Simulation</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <!-- <link rel="stylesheet" href="css/vis.min.css"> -->
-    <!--
-      <link rel="stylesheet" href="css/jquery-ui.css">
-      <link rel="stylesheet" href="css/jquery-ui.structure.css">
-    -->
-    <link rel="stylesheet" href="css/main.css">
-   <style>
-      body {
-        padding-top: 50px;
-      }
-    </style>
-  </head>
-  <body>
-    <!--[if lt IE 8]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Marrow Donor Registry OntoUML Simulator</a>
-        </div>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <!-- <link rel="stylesheet" href="css/vis.min.css"> -->
+  <!--
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.css">
+  -->
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+body {
+  padding-top: 50px;
+}
+  </style>
+</head>
+<body>
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header pull-left">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Marrow Donor Registry OntoUML Simulator</a>
       </div>
-    </nav>
+      <ul class="nav navbar-nav">
+        <li id="model-mi" class="active"><a href="#" onclick="gotoModel();">Model</a></li>
+        <li id="methodology-mi"><a href="#" onclick="gotoMethodology();">Methodology</a></li>
+        <li id="about-mi"><a href="#" onclick="gotoAbout();">About</a></li>
+      </ul>
+      <div class="navbar-right">
+        <a href="https://www.elixir-czech.cz/" target="_blank"><img class="logo" src="img/logo-elixir-cz.jpg" alt="Logo ELIXIR CZ"></a>
+        <a href="http://www.cvut.cz/" target="_blank"><img class="logo" src="img/logo-fit.png" alt="Logo FIT"></a>
+        <a href="https://ccmi.fit.cvut.cz/" target="_blank"><img class="logo" src="img/logo-ccmi.png" alt="Logo CCMi"></a>
+        <a href="https://www.zcu.cz" target="_blank"><img class="logo" src="img/logo-zcu.png" alt="Logo ZCU"></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Model -->
+  <div id="model-page" class="container-fluid">
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -51,50 +65,62 @@
       <li><button type="button" onclick="Haste['resizeRight']()" style="margin: 10px 0 0 0">&rarr;</button></li>
     </ul>
 
-    <!-- Tab panes -->
+    <!-- Tab panes Simulation -->
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="ufoa-inst-tab">
-        <!-- <div id='loader' class='loader'></div> -->
-        <div id="ufob-box" class="ufob-box">
-          <div class="diag-ufob">
-            <object type='image/svg+xml' id='ufob-svg' data='img/ufob.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object>
-          </div>
-          <div id="story-ufob" class="story-ufob">
-          </div>
+    <div role="tabpanel" class="tab-pane active" id="ufoa-inst-tab">
+      <!-- <div id='loader' class='loader'></div> -->
+      <div id="ufob-box" class="ufob-box">
+        <div class="diag-ufob">
+          <object type='image/svg+xml' id='ufob-svg' data='img/ufob.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object>
         </div>
-        <div id="ufoa-inst-box" class="ufoa-inst-box">
-          <object type='image/svg+xml' id='ufoa-inst-svg' data='img/ufoa&#45;inst.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object> -->
+        <div id="story-ufob" class="story-ufob">
         </div>
       </div>
-
-      <div role="tabpanel" class="tab-pane" id="ufoa-tab">
-        <div id="ufoa-box" class="ufoa-box">
-          <object type='image/svg+xml' id='ufoa-svg' data='img/ufoa.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object>
-        </div>
-      </div>
-
-      <div role="tabpanel" class="tab-pane suitability-panel" id="domain-tab">
-        <div class="suitability-panel-left">
-          <img src="img/domain.png" alt="Suitability Evaluation Model">
-        </div>
-        <div class="panel panel-primary suitability-panel-right"><F7>
-          <div class="panel-body">
-            When selecting a donor, numerous human leukocyte antigens (HLA) and numerous non-HLA factors are considered, although the most important is a HLA match between a donor and a patient (stem cells recipient).  The HLA complex is known to be the most polymorphic genetic system in humans. It is located within the 6p21.3 region on the short arm of human chromosome 6 and contains more than 220 genes of diverse function (the variant form of a given gene is an allele). That’s why a well-structured database of donors containing all necessary attributes is an important part of clinical decision support system for choosing the donor for transplantation.
-          </div>
-        </div>
+      <div id="ufoa-inst-box" class="ufoa-inst-box">
+        <object type='image/svg+xml' id='ufoa-inst-svg' data='img/ufoa&#45;inst.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object> -->
       </div>
     </div>
 
-    <footer class="footer navbar-fixed-bottom">
-      &copy; <a href="http://fit.cvut.cz/">FIT CTU</a>, <a href="http://zcu.cz/">ZCU</a> 2017. This project was supported by <a href="https://www.elixir-czech.cz/">ELIXIR CZ</a>.
-    </footer>
-    </div> <!-- /container -->
-  </body>
-  <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-  <script src="js/vendor/jquery-3.2.1.min.js"></script>
-  <!-- <script src="js/vendor/jquery-ui.min.js"></script> -->
-  <script src="js/vendor/bootstrap.min.js"></script>
-  <!-- <script src="js/vendor/vis.min.js"></script> -->
-  <!-- <script src="js/vis.js"></script> -->
-  <script src="js/main.js"></script>
+    <div role="tabpanel" class="tab-pane" id="ufoa-tab">
+      <div id="ufoa-box" class="ufoa-box">
+        <object type='image/svg+xml' id='ufoa-svg' data='img/ufoa.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane suitability-panel" id="domain-tab">
+      <div class="suitability-panel-left">
+        <img src="img/domain.png" alt="Suitability Evaluation Model">
+      </div>
+      <div class="panel panel-primary suitability-panel-right"><F7>
+        <div class="panel-body">
+          When selecting a donor, numerous human leukocyte antigens (HLA) and numerous non-HLA factors are considered, although the most important is a HLA match between a donor and a patient (stem cells recipient).  The HLA complex is known to be the most polymorphic genetic system in humans. It is located within the 6p21.3 region on the short arm of human chromosome 6 and contains more than 220 genes of diverse function (the variant form of a given gene is an allele). That’s why a well-structured database of donors containing all necessary attributes is an important part of clinical decision support system for choosing the donor for transplantation.
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Page Methodology -->
+  <div id="methodology-page" style="display: hidden;" class="container-fluid">
+    <p>Methodology</p>
+  </div>
+
+  <!-- Page About -->
+  <div id="about-page" style="display: hidden;" class="container-fluid">
+    <p>About</p>
+  </div>
+
+  <footer class="footer navbar-fixed-bottom">
+    &copy; <a href="http://fit.cvut.cz/" target="_blank">FIT CTU</a>, <a href="https://zcu.cz/" target="_blank">ZCU</a> 2017. This project was supported by <a href="https://www.elixir-czech.cz/" target="_blank">ELIXIR CZ</a>.
+  </footer>
+  </div> <!-- /container -->
+</body>
+<script src="js/vendor/modernizr-2.8.3.min.js"></script>
+<script src="js/vendor/jquery-3.2.1.min.js"></script>
+<!-- <script src="js/vendor/jquery-ui.min.js"></script> -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- <script src="js/vendor/vis.min.js"></script> -->
+<!-- <script src="js/vis.js"></script> -->
+<script src="js/menu.js"></script>
+<script src="js/main.js"></script>
 </html>

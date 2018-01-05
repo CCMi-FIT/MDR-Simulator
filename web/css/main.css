@@ -257,6 +257,17 @@ footer {
     vertical-align: top;
 }
 
+.logo-panel {
+    background: white;
+    float: right;
+}
+
+img.logo {
+  max-height: 48px;
+  margin: 2px;
+}
+
+
 // Loading spinner
 
 .loader,
