@@ -26,3 +26,7 @@ function gotoAbout() {
   $('#methodology-mi').removeClass("active");
   $('#about-mi').addClass("active");
 }
+
+function gotoEvaluation() {
+  $('.nav-tabs a[href="#domain-tab"]').tab('show');
+}
