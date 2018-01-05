@@ -1,5 +1,17 @@
 'use strict';
 
+var currentTab = '#simulation-tab';
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("href") // activated tab
+  if (target == '#simulation-tab') {
+    $('#controls').css('display', 'block');
+  } else {
+    $('#controls').css('display', 'none');
+  }
+  currentTab = target;
+});
+
 function gotoModel() {
   $('#model-page').css('display', 'block');
   $('#methodology-page').css('display', 'none');
@@ -29,4 +41,14 @@ function gotoAbout() {
 
 function gotoEvaluation() {
   $('.nav-tabs a[href="#domain-tab"]').tab('show');
+}
+
+function downloadDiagram() {
+  var d;
+  switch (currentTab) {
+    case '#simulation-tab': d = 'ufob.svg'; break;
+    case '#ufoa-tab': d = 'ufoa.svg'; break;
+    case '#domain-tab': d = 'domain.png'; break;
+  }
+  window.open('img/' + d);
 }

@@ -58,16 +58,29 @@ body {
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#ufoa-inst-tab" aria-controls="ufoa-inst-tab" role="tab" data-toggle="tab">Simulation</a></li>
+      <li role="presentation" class="active"><a href="#simulation-tab" aria-controls="simulation-tab" role="tab" data-toggle="tab">Simulation</a></li>
       <li role="presentation"               ><a href="#ufoa-tab"      aria-controls="ufoa-tab"      role="tab" data-toggle="tab">Structural Model</a></li>
       <li role="presentation"               ><a href="#domain-tab"      aria-controls="domain-tab"      role="tab" data-toggle="tab">Suitability Evaluation Model</a></li>
-      <li><button type="button" onclick="Haste['resizeLeft']()" style="margin: 10px 0 0 20px">&larr;</button></li>
-      <li><button type="button" onclick="Haste['resizeRight']()" style="margin: 10px 0 0 0">&rarr;</button></li>
+      <li>
+        <span id="controls" class="btn-group btn-group-sm" role="group" style="margin-top: 7px;">
+          <button type="button" class="btn btn-default" data-toggle="tooltip" title="Resizer left" onclick="Haste['resizeLeft']()">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-default" data-toggle="tooltip" title="Resizer right" onclick="Haste['resizeRight']()">
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          </button>
+        </span>
+        <span class="btn-group btn-group-sm" role="group" style="margin-top: 7px;">
+          <button type="button" class="btn btn-default" data-toggle="tooltip" title="Diagram download" onclick="downloadDiagram();">
+            <span class="glyphicon glyphicon-download" aria-hidden="false"></span>
+          </button>
+        </span>
+      </li>
     </ul>
 
     <!-- Tab panes Simulation -->
     <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="ufoa-inst-tab">
+    <div role="tabpanel" class="tab-pane active" id="simulation-tab">
       <!-- <div id='loader' class='loader'></div> -->
       <div id="ufob-box" class="ufob-box">
         <div class="diag-ufob">
