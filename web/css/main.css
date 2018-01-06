@@ -262,13 +262,20 @@ footer {
     float: right;
 }
 
-img.logo {
+.logo {
   max-height: 48px;
   margin: 2px;
 }
 
+.img-help {
+    max-width: 150px;
+}
 
-// Loading spinner
+.img-help2 {
+    max-width: 300px;
+}
+
+/*  Loading spinner */
 
 .loader,
 .loader:after {
