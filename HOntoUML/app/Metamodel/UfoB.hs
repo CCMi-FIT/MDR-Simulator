@@ -143,7 +143,7 @@ oumsElements = foldl foldSituation []
     foldEOperation insts1 eOperation = eOperation insts1
 
 oumsGeneralizations :: OUModelInst -> ModelState -> [OUGeneralizationInst]
-oumsGeneralizations ouModelInst ms = filter (\(OUGeneralizationInst _ _ sub) -> sub `elem` oumsElements ms) (oumiGeneralizations ouModelInst)
+oumsGeneralizations ouModelInst ms = filter (\(OUGeneralizationInst _ sup sub) -> (sup `elem` oumsElements ms) && (sub `elem` oumsElements ms)) (oumiGeneralizations ouModelInst)
 
 oumsAssocs :: OUModelInst -> ModelState -> [OUAssocInst]
 oumsAssocs ouModelInst ms = filter isSituationAssoc (oumiAssocs ouModelInst)
