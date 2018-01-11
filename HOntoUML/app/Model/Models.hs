@@ -19,9 +19,9 @@ ouModel = OUModel
 
 ouModelInst :: OUModelInst
 ouModelInst = OUModelInst
-  { oumiGeneralizationClusters = [[gi0_1, gi0_2, gi0_3, gi1, gi3_1, gi3_2, gi3_3, gi6, gi24_1, gi24_2, gi24_3, gi24_4, gi7, gi8a, gi8b, gi8c, gi8d, gi11_1, gi11_2, gi11b, gi16_1, gi16_2, gi17, gi18, gi25_1], [gi5_1_1, gi5_1_2], [gi5_2_1, gi5_2_2], [gi4_1, gi4_2, gi4_3, gi4_4], [gi9a_1, gi9a_2], [gi26_1, gi27_1], [gi10_1, gi10_2, gi10_3], [gi12_1, gi12_2, gi12_3], [gi13_1, gi13_2, gi13_3], [gi19_1, gi19_2], [gi20_1, gi20_2, gi20_3],[gi22_1_1, gi22_2_1, gi22_3_1], [gi23_1_1, gi23_2_1, gi23_3_1], [gi28a, gi28b, gi28c, gi29a, gi29b, gi29c, gi30a, gi30b, gi30c], [gi31_1, gi31_2, gi31_3], [gi32, gi33, gi34, gi35], [gi36_1, gi36_2], [gi37_1, gi37_2]]
+  { oumiGeneralizationClusters = [[gi0_1, gi0_2, gi0_3, gi1, gi3_1, gi3_2, gi3_3, gi6, gi24_1, gi24_2, gi24_3, gi24_4, gi7, gi8a, gi8b, gi8c, gi8d, gi11_1, gi11_2, gi11b, gi16_1, gi16_2, gi17, gi18, gi25_1], [gi5_1_1, gi5_1_2], [gi5_2_1, gi5_2_2], [gi4_1, gi4_2, gi4_3, gi4_4], [gi9a_1, gi9a_2], [gi26_1, gi27_1], [gi10_1, gi10_2, gi10_3], [gi12_1, gi12_2, gi12_3], [gi13_1, gi13_2, gi13_3], [gi19_1, gi19_2], [gi20_1, gi20_2, gi20_3], [gi22_1_1, gi22_2_1, gi22_3_1],  [gi22_1_2, gi22_2_2, gi22_3_2], [gi22_1_3, gi22_2_3, gi22_3_3], [gi23_1_1, gi23_2_1, gi23_3_1], [gi23_1_2, gi23_2_2, gi23_3_2], [gi23_1_3, gi23_2_3, gi23_3_3], [gi28a, gi28b, gi28c, gi29a, gi29b, gi29c, gi30a, gi30b, gi30c], [gi31_1, gi31_2, gi31_3], [gi32, gi33, gi34, gi35], [gi36_1, gi36_2], [gi37_1, gi37_2]]
    , oumiAssocs = [ai1, ai3, ai6_1, ai6_2, ai6_3, ai6_4, ai7_1, ai7_2, ai7_3, ai8_1, ai8_2, ai8_3, ai9_1, ai9_2, ai9_3, ai10_1, ai10_2, ai10_3, ai11_1, ai11_2, ai11_3, ai12_1, ai12_2, ai12_3, ai13, ai14_1, ai14_2, ai15_1_1, ai16a_2a, ai16a_3, ai17a, ai17b, ai18a, ai18b, ai19, ai21, ai22_1, ai22_2, ai22_3, ai23_1, ai23_2, ai23_3, ai24, ai25, ai26, ai27_1, ai27_2, ai27_3, ai28, ai29, ai30_1, ai30_2, ai31_1, ai31_2, ai32, ai32_1, ai32_2, ai32_3, ai33_1, ai33_2, ai33_3a, ai33_3b, ai34a, ai34b, ai34_1a, ai34_1b, ai34_2aa, ai34_2ab, ai34_2b, ai34_2c, ai34_2d, ai35_1, ai36a, ai36aa, ai36ba, ai36b, ai36c, ai37a, ai37b,  ai39, ai40, ai42_1a, ai42_1b, ai42_2a, ai42_2c, ai42_3a, ai42_3c, ai44, ai45, ai46, ai47a, ai47b, ai48, ai49, ai50, ai51, ai52, ai53, ai54, ai55, ai56, ai57, ai58_1, ai58_2, ai58_3, ai59_1, ai59_2, ai59_3, ai60, ai61, ai62, ai63, ai64, ai65]
-   , oumiAssocsPH = [mi1, mi2, mi3, mi4b, mi5, mi6_1, mi6_2, mi6_3, mi7_1, mi9, mi10a, mi10b, mi10c, mi10d, mi11, mi12a, mi13_1, mi13_1a, mi13_1b, mi13_1c, mi13_2a, mi13_2b, mi13_2c, mi13_3, mi13_3a, mi13_3b, mi13_3c, mi15]
+   , oumiAssocsPH = [mi1, mi2, mi3, mi4b, mi5, mi6_1, mi6_2, mi6_3, mi7_1, mi7_2, mi7_3, mi9, mi10a, mi10b, mi10c, mi10d, mi11, mi12a, mi13_1, mi13_1a, mi13_1b, mi13_1c, mi13_2a, mi13_2b, mi13_2c, mi13_3, mi13_3a, mi13_3b, mi13_3c, mi15]
   }
 
 -- UFO-B --
@@ -78,10 +78,9 @@ sAspirantDonor =
       , iExamination
       , iInitialExamination
       , iBloodSampleDraw1
-      , iBloodSample
-      , iMedicalAssessment
+      , iBloodSample1
+      , iBSFresh1
       , iMedicalAssessment1
-      , iMedicalAssessmentResults
       , iMedicalAssessmentResults1
       ]
     ]
@@ -94,14 +93,22 @@ sAspirantDonor =
 sAvailable :: OUSituation
 sAvailable =
   mkSituation "Donor Available"
+   -- [ removeElements
+   --   [ iBSFresh1
+   --   , iDSFresh1 ]
     [ addElements
       [ iDonor
       , iDNAIsolation1
-      , iDNASample
+      , iDNASample1
+      , iDSStored1
+      , iDSDisposed1
+      , iBSStored1
+      , iBSDisposed1
       , iHLATyping1
       , iGeneAssignment1
       , iDonorsTypingResults1
       , iGenotypeValue1
+
       ]
     , switchPhase' [iGenotypeEvaluated1]
     , switchPhase' [iDonorAvailable]
@@ -166,17 +173,22 @@ sFound =
     , OUDisposition (Just "Extended HLA\nTyping Required\nand\nDNA Sample\nAvailable")
       [OUEventB "Extended\nHLA\nTyping\nfrom Stored\nDNA Sample" sHLATyped2_2 ]
     , OUDisposition (Just "Extended HLA\nTyping Required\nand\nBlood Sample/DNA\nnot Available")
-      [OUEventB "Donor Activation\nand Blood Sample Draw (2)" sDraw2 ]
+      [OUEventB "Donor Activation\nand Blood Sample Draw\nfor Extended HLA Typing" sDraw2 ]
     ]
     sFoundT
 
 sDraw2 :: OUSituation
 sDraw2 =
-  mkSituation "Donor Blood Sample\nDrawn (2)"
+  mkSituation "Donor Blood Sample\nDrawn for\nExtended HLA Typing"
+   -- [ removeElements
+   --   [ iBSStored1
+   --   , iDSStored1
+   --   ]
     [ addElements
       [ iExtendedExamination
       , iBloodSampleDraw2
-      , iBloodSample
+      , iBloodSample2
+      , iBSFresh2
       ]
       , switchPhase' [iSelectedET]
     ]
@@ -188,9 +200,15 @@ sDraw2 =
 sHLATyped2_1 :: OUSituation
 sHLATyped2_1 =
   mkSituation "Donor\nExtended HLA Typed\n from a Stored\nBlood Sample"
+   -- [ removeElements
+   --   [ iDSStored1
+   --   , iBSStored1]
+   --   ]
     [ addElements
-      [ iBSStored
-      , iDNASample
+      [ iBSDisposed1
+      , iDNASample2
+      , iDSStored2
+      , iDSDisposed2
       , iDNAIsolation2
       , iHLATyping2
       , iDonorsTypingResults2
@@ -208,11 +226,12 @@ sHLATyped2_2 :: OUSituation
 sHLATyped2_2 =
   mkSituation "Donor\nExtended HLA Typed\nfrom a Stored\nDNA Sample"
     [ addElements
-      [ iDSStored
+      [ iDSStored1
       , iHLATyping2
       , iDonorsTypingResults2
       , iGeneAssignment2
       , iGenotypeValue1
+      , iDSDisposed1
       ]
       , switchPhase' [iSelectedET]
     ]
@@ -224,8 +243,16 @@ sHLATyped2_2 =
 sHLATyped2_3 :: OUSituation
 sHLATyped2_3 =
   mkSituation "Donor\nExtended\nHLA Typed\nfrom a Fresh\nBlood Sample"
-    [ addElements
-      [ iDNASample
+    [ removeElements
+      [ iBSFresh2
+      , iDSFresh2 -- pridal?!
+      ]
+    , addElements
+      [ iBSStored2
+      , iBSDisposed2
+      , iDNASample2
+      , iDSStored2
+      , iDSDisposed2
       , iDNAIsolation2
       , iHLATyping2
       , iDonorsTypingResults2
@@ -244,16 +271,18 @@ sSelection =
   mkSituation "Donors Selected\nfor Verification"
     [ switchPhase' [iSelectedV] ]
     [ OUDisposition Nothing
-      [ OUEventB "Donor Activation\nand Blood Sample Draw (3)" sDraw3 ]
+      [ OUEventB "Donor Activation\nand Blood Sample Draw\nfor Verification Examination" sDraw3 ]
     ]
     sSelectionT
 
 sDraw3 :: OUSituation
 sDraw3 =
-  mkSituation "Donor Blood Sample\nDrawn (3)"
+  mkSituation "Donor Blood Sample\nDrawn for\nVerification Examination"
     [ addElements
       [ iBloodSampleDraw3
-      , iBloodSample
+      , iBloodSample3
+      , iBSFresh3
+      , iVerificationExamination
       ]
     ]
     [ OUDisposition Nothing
@@ -270,7 +299,6 @@ sScreened =
   [ addElements
     [ iMedicalAssessment2
     , iMedicalAssessmentResults2
-    , iInfectionTesting
     , iInfectionTestingV
     , iInfectionMarkersV
     ]
@@ -283,13 +311,20 @@ sScreened =
 sHLAVerified :: OUSituation
 sHLAVerified =
   mkSituation "Donor HLA Verified"
+  --[ removeElements
+  --  [ iBSFresh3 ]
   [ addElements
-    [ iDNASample
+    [ iBloodSample3
+    , iDNASample3
     , iDNAIsolation3
     , iHLATyping3
     , iDonorsTypingResults3
     , iGeneAssignment3
-    , iGenotypeValue1 --TODO
+    , iGenotypeValue1
+    , iBSStored3
+    , iBSDisposed3
+    , iDSStored3
+    , iDSDisposed3
      ]
   ]
   [OUDisposition Nothing
@@ -358,7 +393,7 @@ sWorkup =
       , iInfectionTestingW
       , iInfectionMarkersW
       , iBloodSampleDraw4
-      , iBloodSample
+      , iBloodSample1
       ]
     ]
     [ OUDisposition (Just "Donor\nEligible")
@@ -526,7 +561,7 @@ sWorkup2 =
       , iInfectionTestingW
       , iInfectionMarkersW
       , iBloodSampleDraw4
-      , iBloodSample
+      , iBloodSample1
       ]
     ]
     [ OUDisposition Nothing
