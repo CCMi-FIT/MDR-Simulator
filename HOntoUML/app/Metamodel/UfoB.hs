@@ -86,8 +86,8 @@ newtype OUModelB = OUModelB
   { oumbSituations :: [OUSituation]
   }
 
-oumbElementsInsts :: OUModelB -> [OUElementInst]
-oumbElementsInsts ouModelB = nub $ oumsElements (oumbSituations ouModelB)
+--oumbElementsInsts :: OUModelB -> [OUElementInst]
+--oumbElementsInsts ouModelB = nub $ concatMap msElements (oumbSituations ouModelB)
 
 -- Combinators --
 
@@ -95,7 +95,7 @@ addElements :: ECombinator
 addElements = mappend
 
 removeElements :: ECombinator
-removeElements = (\\)
+removeElements =  (\\)
 
 switchPhase :: OUModelInst -> ECombinator
 switchPhase ouModelInst [newPhase] eis1 = (eis1 `removeElements` getSiblingPhases newPhase) `addElements` [newPhase]
@@ -118,53 +118,42 @@ switchPhase _ _ _ = error "Just one phase can be in switchPhase"
 
 -- Simulation --
 
-type ModelState = [OUSituation]
+data ModelState = ModelState
+  { msSituations :: [OUSituation]
+  , msElements :: [OUElementInst]
+  , msGeneralizations :: [OUGeneralizationInst]
+  , msAssocs :: [OUAssocInst]
+  , msAssocsPH :: [OUAssocPHInst]
+  }
 
 initModelState :: ModelState
-initModelState = [emptySituation]
+initModelState = ModelState [emptySituation] [] [] [] []
 
-isInitial :: ModelState -> Bool
-isInitial ms = length ms == 1
+isInitialMs :: ModelState -> Bool
+isInitialMs ms = length (msSituations ms) == 1
 
-addSituation :: ModelState -> OUSituation -> ModelState
-addSituation ms s = ms <> [s]
+lastMsSituation :: ModelState -> OUSituation
+lastMsSituation = DL.last . msSituations
 
-lastSituation :: ModelState -> OUSituation
-lastSituation [] = emptySituation
-lastSituation ms = DL.last ms
-
-oumsElements :: ModelState -> [OUElementInst]
-oumsElements = foldl foldSituation []
+addSituation :: OUModelInst -> ModelState -> OUSituation -> ModelState
+addSituation ouModelInst oldms s = ModelState
+  { msSituations = msSituations oldms <> [s]
+  , msElements = newElems
+  , msGeneralizations = filter (\(OUGeneralizationInst _ sup sub) -> (sup `elem` newElems) && (sub `elem` newElems)) (oumiGeneralizations ouModelInst)
+  , msAssocs = filter (\(OUAssocInst _ ei1 ei2) -> ei1 `elem` newElems && ei2 `elem` newElems) (oumiAssocs ouModelInst)
+  , msAssocsPH = filter (\(OUAssocPHInst _ ei1 ei2) -> ei1 `elem` newElems && ei2 `elem` newElems) (oumiAssocsPH ouModelInst)
+  }
   where
-  foldSituation :: [OUElementInst] -> OUSituation -> [OUElementInst]
-  foldSituation insts s = foldl foldEOperation insts (ousEOperations s)
-    where
-    foldEOperation :: [OUElementInst] -> EOperation -> [OUElementInst]
-    foldEOperation insts1 eOperation = eOperation insts1
+    newElems = foldl (\insts1 eOp -> eOp insts1) (msElements oldms) (ousEOperations s)
 
-oumsGeneralizations :: OUModelInst -> ModelState -> [OUGeneralizationInst]
-oumsGeneralizations ouModelInst ms = filter (\(OUGeneralizationInst _ sup sub) -> (sup `elem` oumsElements ms) && (sub `elem` oumsElements ms)) (oumiGeneralizations ouModelInst)
+msElementsNew :: ModelState -> ModelState -> [OUElementInst]
+msElementsNew ms1 ms2 = msElements ms2 \\ msElements ms1
 
-oumsAssocs :: OUModelInst -> ModelState -> [OUAssocInst]
-oumsAssocs ouModelInst ms = filter isSituationAssoc (oumiAssocs ouModelInst)
-  where
-  isSituationAssoc :: OUAssocInst -> Bool
-  isSituationAssoc (OUAssocInst _ ei1 ei2) = ei1 `elem` oumsElements ms && ei2 `elem` oumsElements ms
+msAssocsNew :: ModelState -> ModelState -> [OUAssocInst]
+msAssocsNew ms1 ms2 = msAssocs ms2 \\ msAssocs ms1
 
-oumsAssocsPH :: OUModelInst -> ModelState -> [OUAssocPHInst]
-oumsAssocsPH ouModelInst ms = filter isSituationAssocPH (oumiAssocsPH ouModelInst)
-  where
-  isSituationAssocPH :: OUAssocPHInst -> Bool
-  isSituationAssocPH (OUAssocPHInst _ ei1 ei2) = ei1 `elem` oumsElements ms && ei2 `elem` oumsElements ms
-
-oumsElementsNew :: ModelState -> ModelState -> [OUElementInst]
-oumsElementsNew ms1 ms2 = oumsElements ms2 \\ oumsElements ms1
-
-oumsAssocsNew :: OUModelInst -> ModelState -> ModelState -> [OUAssocInst]
-oumsAssocsNew ouModelInst ms1 ms2 = oumsAssocs ouModelInst ms2 \\ oumsAssocs ouModelInst ms1
-
-oumsAssocsPHNew :: OUModelInst -> ModelState -> ModelState -> [OUAssocPHInst]
-oumsAssocsPHNew ouModelInst ms1 ms2 = oumsAssocsPH ouModelInst ms2 \\ oumsAssocsPH ouModelInst ms1
+msAssocsPHNew :: ModelState -> ModelState -> [OUAssocPHInst]
+msAssocsPHNew ms1 ms2 = msAssocsPH ms2 \\ msAssocsPH ms1
 
 -- Checks --
 checkConsistency :: OUModelInst -> [Text]
@@ -206,10 +195,10 @@ checkConsistency ouModelInst =
         e2Match :: [Text]
         e2Match = ["!" <> aId <> " assocPH mismatch: " <> oueiLabel i2 | e2 /= ei2]
 
-checkMissingInsts :: OUModel -> OUModelB -> [Text]
-checkMissingInsts ouModel ouModelB = checkMissingElemInsts
-  where
-    checkMissingElemInsts = concatMap checkElemInst (oumElements ouModel)
-      where
-      checkElemInst :: OUElement -> [Text]
-      checkElemInst e = ["Warning: No situation contains instance of " <> ouId e | e `notElem` map (\(OUElementInst e1 _) -> e1) (oumbElementsInsts ouModelB)]
+--checkMissingInsts :: OUModel -> OUModelB -> [Text]
+--checkMissingInsts ouModel ouModelB = checkMissingElemInsts
+--  where
+--    checkMissingElemInsts = concatMap checkElemInst (oumElements ouModel)
+--      where
+--      checkElemInst :: OUElement -> [Text]
+--      checkElemInst e = ["Warning: No situation contains instance of " <> ouId e | e `notElem` map (\(OUElementInst e1 _) -> e1) (oumbElementsInsts ouModelB)]

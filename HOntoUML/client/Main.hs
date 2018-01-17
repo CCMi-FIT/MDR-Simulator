@@ -2,7 +2,7 @@
 
 module Main where
 
-import qualified Data.List as DL
+--import qualified Data.List as DL
 import Data.Monoid ((<>))
 import Data.IORef
 import Control.Monad (unless)
@@ -75,23 +75,23 @@ writeModelState = writeIORef
 gotoSituation :: OUSituation -> ModelStateRef -> IO ()
 gotoSituation s2 msRef = do
   ms1 <- readModelState msRef
-  unless (DL.last ms1 == s2) (do
+  unless (lastMsSituation ms1 == s2) (do
     --startLoader
-    let ms2 = addSituation ms1 s2
+    let ms2 = addSituation ouModelInst ms1 s2
     mapM_ hidePart (oumiElements ouModelInst)
     mapM_ hidePart (oumiGeneralizations ouModelInst)
     mapM_ hidePart (oumiAssocs ouModelInst)
     mapM_ hidePart (oumiAssocsPH ouModelInst)
-    mapM_ showPart (oumsElements ms2)
-    mapM_ showPart (oumsGeneralizations ouModelInst ms2)
-    mapM_ showPart (oumsAssocs ouModelInst ms2)
-    mapM_ showPart (oumsAssocsPH ouModelInst ms2)
-    mapM_ lowlightElem (oumsElements ms1)
-    mapM_ highlightElem (oumsElementsNew ms1 ms2)
-    mapM_ lowlightAssoc (oumsAssocs ouModelInst ms1)
-    mapM_ highlightAssoc (oumsAssocsNew ouModelInst ms1 ms2)
-    mapM_ lowlightAssoc (oumsAssocsPH ouModelInst ms1)
-    mapM_ highlightAssoc (oumsAssocsPHNew ouModelInst ms1 ms2)
+    mapM_ showPart (msElements ms2)
+    mapM_ showPart (msGeneralizations ms2)
+    mapM_ showPart (msAssocs ms2)
+    mapM_ showPart (msAssocsPH ms2)
+    mapM_ lowlightElem (msElements ms1)
+    mapM_ highlightElem (msElementsNew ms1 ms2)
+    mapM_ lowlightAssoc (msAssocs ms1)
+    mapM_ highlightAssoc (msAssocsNew ms1 ms2)
+    mapM_ lowlightAssoc (msAssocsPH ms1)
+    mapM_ highlightAssoc (msAssocsPHNew ms1 ms2)
     _ <- setStory
     writeModelState msRef ms2
     --stopLoader
@@ -201,8 +201,8 @@ addEvents msRef s = do
     setActive :: ModelStateRef -> OUSituation -> IO ()
     setActive msRef1 s1 = do
       modelState <- readModelState msRef1
-      unless (isInitial modelState) (do
-        _ <- getBShape (DL.last modelState) >>= setAttr "fill" visitedCol
+      unless (isInitialMs modelState) (do
+        _ <- getBShape (lastMsSituation modelState) >>= setAttr "fill" visitedCol
         return ())
       _ <- getBShape s1 >>= setAttr "fill" hlCol
       gotoSituation s1 msRef1

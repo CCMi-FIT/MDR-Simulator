@@ -3,13 +3,13 @@
 module Main where
 
 import Data.Monoid ((<>))
-import qualified Data.Text.Lazy.IO as T
+--import qualified Data.Text.Lazy.IO as T
 import Data.GraphViz.Attributes
 import Data.GraphViz.Attributes.Complete (Attribute(Margin), DPoint(DVal))
 
 import Metamodel.UfoA
 import Metamodel.UfoAInst
-import Metamodel.UfoB
+--import Metamodel.UfoB
 import Model.Models
 import Rendering
 import Styling
@@ -46,7 +46,7 @@ ouStyle = OUStyle { oueStyle = oueStyle1, oueInstStyle = oueiStyle1, ouaStyle = 
 
 main :: IO ()
 main = do
-  mapM_ T.putStrLn (checkConsistency ouModelInst <> checkMissingInsts ouModel ouModelB)
+  --mapM_ T.putStrLn (checkConsistency ouModelInst <> checkMissingInsts ouModel ouModelB)
   renderOUModel ouModel ouStyle "dist/ufoa"
   renderOUModelInst ouModelInst ouStyle "dist/ufoa-inst"
   renderOUModelB ouModelB "dist/ufob"
