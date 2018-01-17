@@ -6,8 +6,10 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href") // activated tab
   if (target == '#simulation-tab') {
     $('#controls').css('display', 'inline-block');
+    $('#help-btn').css('display', 'inline-block');
   } else {
     $('#controls').css('display', 'none');
+    $('#help-btn').css('display', 'none');
   }
   currentTab = target;
 });
