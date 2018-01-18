@@ -92,7 +92,7 @@ sAspirantDonor =
       [ OUEventB "Initial Histocompatibility Testing" sAvailable
       ]
     ]
-    sIssuedRegistrationT
+    sAspirantDonorT
 
 sAvailable :: OUSituation
 sAvailable =
@@ -125,7 +125,7 @@ sAvailable =
     , OUDisposition (Just "Subsequent\nDonation Required")
       [ OUEventB "Subsequent Donation Request" sChosen2 ]
     ]
-    sIssuedRegistrationT
+    sAvailableT
 
 sChosen2 :: OUSituation
 sChosen2 =
@@ -154,7 +154,7 @@ sSearchRequested =
     [ OUDisposition Nothing
       [ mEventB "Donors Search" sFound ]
     ]
-    ""
+    sSearchRequestedT
 
 sTempDeferred :: OUSituation
 sTempDeferred =
@@ -167,14 +167,14 @@ sTempDeferred =
     , OUDisposition (Just "Subsequent\nDonation Required")
       [ OUEventB "Subsequent Donation Request" sChosen2 ]
     ]
-    "Reasons for making an Available Donor temporary unavailable comprise a performed transplantation, or a travel, medical reasons, gravidity and others."
+    sTempDeferredT
 
 sPermDeferred :: OUSituation
 sPermDeferred =
   mkSituation "Donor\nPermanently\nDeferred"
     [ switchPhase' [iDonorPermDeferred] ]
     []
-    "Reasons for making a Donor Permanently Deferred are a.o. Donor's request, age, medical reasons, death or realizing two transplantations."
+    sPermDeferredT
 
 sFound :: OUSituation
 sFound =
@@ -240,7 +240,7 @@ sHLATyped2_1 =
     [ OUDisposition Nothing
       [ OUEventB "Donors Selection\nfor Verification" sSelection ]
     ]
-    sHLATyped2T
+    sHLATypedT
 
 sHLATyped2_2 :: OUSituation
 sHLATyped2_2 =
@@ -258,7 +258,7 @@ sHLATyped2_2 =
     [ OUDisposition Nothing
       [ OUEventB "Donors Selection\nfor Verification" sSelection ]
     ]
-    sHLATyped2T
+    sHLATypedT
 
 sHLATyped2_3 :: OUSituation
 sHLATyped2_3 =
@@ -283,8 +283,7 @@ sHLATyped2_3 =
     [ OUDisposition Nothing
       [ OUEventB "Donors Selection\nfor Verification" sSelection ]
     ]
-    sHLATyped2T
-
+    sHLATypedT
 
 sSelection :: OUSituation
 sSelection =
@@ -359,7 +358,7 @@ sVerified =
   [OUDisposition Nothing
     [ OUEventB "Donor Reservation" sDonorReserved ]
   ]
-  ""
+  sVerifiedT
 
 sDonorReserved :: OUSituation
 sDonorReserved =
@@ -372,7 +371,7 @@ sDonorReserved =
   [OUDisposition Nothing
     [ OUEventB "Collection Request" sChosen ]
   ]
-  ""
+  sDonorReservedT
 
 sChosen :: OUSituation
 sChosen =
@@ -463,7 +462,7 @@ sPBSCPrep =
     [ OUDisposition Nothing
       [ OUEventB "PBSC\nCollection" sPBSCCollected ]
     ]
-    "The PBSC Donation preparation consists of several hormonal injections."
+    sPBSCPrepT
 
 sPBSCCollected :: OUSituation
 sPBSCCollected =
@@ -478,9 +477,9 @@ sPBSCCollected =
     [ OUDisposition Nothing
       [ OUEventB "PBSC\nTransportation" sPBSCDelivered ]
     , OUDisposition Nothing
-      [ OUEventB "Donor\nMonitoring" sMonitored ]
+      [ OUEventB "Donor\nMonitoring" sFollowup ]
     ]
-    ""
+    sPBSCCollectedT
 
 sPBSCDelivered :: OUSituation
 sPBSCDelivered =
@@ -494,7 +493,7 @@ sPBSCDelivered =
     [ OUDisposition Nothing
       [ OUEventB "PBSC\nTransplantation" sPBSC]
     ]
-    ""
+    sPBSCDeliveredT
 
 sPBSC :: OUSituation
 sPBSC =
@@ -510,7 +509,7 @@ sPBSC =
       [ OUEventB "Donor\nBecomes\nTemporary\nUnavailable" sTempDeferred
       ]
     ]
-    "PBSC is a donation of blood cells, which is performed ambulant. After the donation, the Donor is made Temporary Deferred for the period of one year and is monitored for a period of at least 10 years."
+    sPBSCT
 
 sBMCollected :: OUSituation
 sBMCollected =
@@ -527,9 +526,9 @@ sBMCollected =
     [ OUDisposition Nothing
       [ OUEventB "BM\nTransportation" sBMDelivered]
     , OUDisposition Nothing
-      [ OUEventB "Donor\nMonitoring" sMonitored ]
+      [ OUEventB "Donor\nMonitoring" sFollowup ]
     ]
-    ""
+    sBMCollectedT
 
 sBMDelivered :: OUSituation
 sBMDelivered =
@@ -543,7 +542,7 @@ sBMDelivered =
     [ OUDisposition Nothing
       [ OUEventB "BM\nTransplantation" sBM]
     ]
-    ""
+    sBMDeliveredT
 
 sBM :: OUSituation
 sBM =
@@ -558,7 +557,7 @@ sBM =
     [ OUDisposition Nothing
       [ OUEventB "Donor\nBecomes\nTemporary\nUnavailable" sTempDeferred ]
     ]
-    "BM Donation is performed in an anesthetic state in a hospital. After the donation, the Donor is made Temporary Deferred for the period of one year and is monitored for a period of at least 10 years."
+    sBMT
 
 sScheduled2 :: OUSituation
 sScheduled2 =
@@ -572,7 +571,7 @@ sScheduled2 =
   [ OUDisposition Nothing
     [ OUEventB "Schedule\nand Specification\nof Donor Clearance" sWorkup2 ]
   ]
-  ""
+  sScheduled2T
 
 sWorkup2 :: OUSituation
 sWorkup2 =
@@ -593,7 +592,7 @@ sWorkup2 =
     [ OUDisposition Nothing
       [ OUEventB "Subsequent\nCollection of HSC\nApproval" sApproved2 ]
     ]
-    ""
+    sWorkup2T
 
 sApproved2 :: OUSituation
 sApproved2 =
@@ -604,12 +603,12 @@ sApproved2 =
       ]
     ]
     [ OUDisposition Nothing
-      [ OUEventB "Subsequent HSC\nCollection" sDLICollected ]
+      [ OUEventB "Subsequent HSC\nCollection" sHSCCollected ]
     ]
-    ""
+    sApproved2T
 
-sDLICollected :: OUSituation
-sDLICollected =
+sHSCCollected :: OUSituation
+sHSCCollected =
   mkSituation "Subseqent HSC\nCollected"
     [ addElements
       [ iDonorSubsequentHSC
@@ -619,14 +618,14 @@ sDLICollected =
       ]
     ]
     [ OUDisposition Nothing
-      [ OUEventB "Subseqent HSC\nTransportation" sDLIDelivered]
+      [ OUEventB "Subseqent HSC\nTransportation" sHSCDelivered]
     , OUDisposition Nothing
-      [ OUEventB "Donor\nMonitoring" sMonitored ]
+      [ OUEventB "Donor\nMonitoring" sFollowup ]
     ]
-    ""
+    sHSCCollectedT
 
-sDLIDelivered :: OUSituation
-sDLIDelivered =
+sHSCDelivered :: OUSituation
+sHSCDelivered =
   mkSituation "Subseqent HSC\nDelivered"
     [ addElements
       [ iTransportHSC
@@ -635,12 +634,12 @@ sDLIDelivered =
       ]
     ]
     [ OUDisposition Nothing
-      [ OUEventB "Subseqent HSC\nTransplantation" sDLITransplanted ]
+      [ OUEventB "Subseqent HSC\nTransplantation" sHSCTransplanted ]
     ]
-    ""
+    sHSCDeliveredT
 
-sDLITransplanted :: OUSituation
-sDLITransplanted =
+sHSCTransplanted :: OUSituation
+sHSCTransplanted =
   mkSituation "Subsequent HSC\nTransplantation\nCompleted"
     [ addElements
       [ iDLIPatient
@@ -651,10 +650,10 @@ sDLITransplanted =
     [ OUDisposition Nothing
       [ OUEventB "Donor\nBecomes\nTemporary\nUnavailable" sTempDeferred ]
     ]
-    ""
+    sHSCTransplantedT
 
-sMonitored :: OUSituation
-sMonitored =
+sFollowup :: OUSituation
+sFollowup =
   mkSituation "Donor\nFollow-up"
     [ addElements
       [ iDonorFollowup
@@ -663,7 +662,7 @@ sMonitored =
       ]
     ]
     []
-    ""
+    sFollowupT
 
 ouModelB = OUModelB
   { oumbSituations =
@@ -700,9 +699,9 @@ ouModelB = OUModelB
       , sScheduled2
       , sWorkup2
       , sApproved2
-      , sDLICollected
-      , sDLIDelivered
-      , sDLITransplanted
-      , sMonitored
+      , sHSCCollected
+      , sHSCDelivered
+      , sHSCTransplanted
+      , sFollowup
     ]
   }
