@@ -21,7 +21,3 @@ cabal.sandbox.config
 tags
 .stack-work/
 cabal.project.local
-Transform/Questionnaire.hs
-Transform/Main
-DSServer/static/js/main.js
-DSServer/static/css/main.css
