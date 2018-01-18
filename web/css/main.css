@@ -201,6 +201,10 @@ textarea {
     }
 }
 
+h3 {
+    font-size: 16px;
+}
+
 footer {
     display: block;
     height: 25px;
