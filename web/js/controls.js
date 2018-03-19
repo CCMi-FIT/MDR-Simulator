@@ -7,9 +7,12 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   if (target == '#simulation-tab') {
     $('#controls').css('display', 'inline-block');
     $('#help-btn').css('display', 'inline-block');
+    $('#standards-btn').css('display', 'inline-block');
+    $('#story-ufob').html('Select a situation to display the applicable standards.');
   } else {
     $('#controls').css('display', 'none');
     $('#help-btn').css('display', 'none');
+    $('#standards-btn').css('display', 'none');
   }
   currentTab = target;
 });

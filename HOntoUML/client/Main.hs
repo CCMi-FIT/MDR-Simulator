@@ -110,7 +110,9 @@ gotoSituation s2 msRef = do
       highlightAssoc :: OUIdentified ie => ie -> IO JQuery
       highlightAssoc ie = getALine ie >>= setAttr "stroke" "red" >>= setAttr "stroke-width" "3"
       setStory :: IO JQuery
-      setStory = selectById "story-ufob" >>= setHtml (ousStory s2)
+      setStory = selectById "story-ufob" >>= setHtml story
+        where
+        story = "<h2>" <> ousName s2 <> "</h2>" <> ousStory s2
 
 -- Resizing --------------------------------------------------------------
 

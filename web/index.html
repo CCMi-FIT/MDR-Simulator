@@ -69,6 +69,11 @@ body {
           </button>
         </span>
         <!-- Controls -->
+        <span id="standards-btn" class="btn-group btn-group-sm" role="group" style="margin-top: 7px;">
+          <button type="button" class="btn btn-default" title="Help" data-toggle="modal" data-target="#story-ufob-modal">
+            <span class="glyphicon glyphicon-book" aria-hidden="false"></span>
+          </button>
+        </span>
         <span id="controls" class="btn-group btn-group-sm" role="group" style="margin-top: 7px;">
           <button type="button" class="btn btn-default" data-toggle="tooltip" title="Resizer left" onclick="Haste['resizeLeft']()">
             <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
@@ -92,8 +97,6 @@ body {
         <div id="ufob-box" class="ufob-box">
           <div class="diag-ufob">
             <object type='image/svg+xml' id='ufob-svg' data='img/ufob.svg' href='http://caniuse.com/#feat=svg'>Your browser does not support SVG</object>
-          </div>
-          <div id="story-ufob" class="story-ufob">
           </div>
         </div>
         <div id="ufoa-inst-box" class="ufoa-inst-box">
@@ -194,6 +197,25 @@ body {
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- Story modal -->
+  <div id="story-ufob-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h1 class="modal-title">WMDA Standards</h1>
+        </div>
+        <div id="story-ufob" class="modal-body">
+          Select a situation to display the applicable standards.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Help modal -->
