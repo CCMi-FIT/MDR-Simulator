@@ -14,8 +14,8 @@
    viewBox="0 0 55.332454 48.20105"
    version="1.1"
    id="svg2739"
-   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
-   sodipodi:docname="doubleDispositioon.svg"
+   inkscape:version="0.92.2 2405546, 2018-03-11"
+   sodipodi:docname="doubleDisposition.svg"
    inkscape:export-filename="/home/rob/Downloads/doubleDisposition.png"
    inkscape:export-xdpi="619.85999"
    inkscape:export-ydpi="619.85999">
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="-21.547023"
-     inkscape:cy="90.752429"
+     inkscape:cx="-144.40417"
+     inkscape:cy="89.323858"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
